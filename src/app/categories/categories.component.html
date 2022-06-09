@@ -1,1 +1,17 @@
-<p>categories works!</p>
+<div class="list-group" style="margin-left: 10px;margin-top: 18px">
+  <div  *ngFor="let category of categories">
+    <a routerLink="/auctions" (click)="activeCategory=category.name"
+       class="list-group-item d-flex justify-content-between align-items-center"
+       [class.active]="activeCategory==category.name">
+      <span class="badge bg-secondary rounded-pill">{{findAuctionsWhichCategories(category.name)}}</span>
+      {{category.name| uppercase}}
+      <div class="btn-group dropend">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        </button>
+        <ul class="dropdown-menu">
+          <li><a *ngFor="let product of productList(category.name)"></a></li>
+        </ul>
+      </div>
+    </a>
+    </div>
+  </div>

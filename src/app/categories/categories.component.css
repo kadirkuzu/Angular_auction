@@ -1,0 +1,9 @@
+.list-group a.active{
+  background-color: black;
+  border-color: black;
+  color: white !important;
+}
+.list-group a:hover{
+  color: black;
+  font-weight:bold;
+}

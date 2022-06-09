@@ -1,7 +1,16 @@
 @import "bootstrap";
+.hovereffectblack:hover{
+  font-weight:bold;
+  font-size:medium;
+  background-color: black;
+  color: white;
+}
 .hovereffect:hover{
   font-weight:bold;
-  background-color: black;
+  font-size:medium;
+}
+.focuseffect:focus{
+
 }
 html,body{
   margin: 0;

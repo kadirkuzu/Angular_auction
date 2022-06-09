@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Auctions} from "./auctions";
+import {AuctionsService} from "../../../Services/auctionsService/auctions.service";
 
 @Component({
   selector: 'app-auctions-page',
@@ -6,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auctions-page.component.css']
 })
 export class AuctionsPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private http: HttpClient,public auctionsService:AuctionsService) {
   }
+  ngOnInit(): void {
 
+  }
 }
+
+
