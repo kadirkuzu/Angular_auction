@@ -4,7 +4,7 @@
     <div class="modal-content rounded-5 shadow">
       <div class="modal-header p-5 pb-4 border-bottom-0">
         <h2 class="fw-bold mb-0">Kayıt Olun</h2>
-        <button type="button" class="btn-close" routerLink="/anasayfa" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" routerLink="/home" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body p-5 pt-0">
@@ -29,7 +29,7 @@
             <input formControlName="password" type="password" class="form-control rounded-4" id="yeniKullaniciSifre" placeholder="Password">
             <label for="yeniKullaniciSifre">Yeni şifre</label>
           </div>
-          <button [disabled]="form.invalid" class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Kayıt ol</button>
+          <button [disabled]="form.invalid" (click)="signUp()" class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Kayıt ol</button>
         </form>
       </div>
     </div>

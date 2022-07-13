@@ -1,17 +1,31 @@
 <div class="list-group" style="margin-left: 10px;margin-top: 18px">
+  <h4 style="margin-left: 15px">Categories</h4>
   <div  *ngFor="let category of categories">
-    <a routerLink="/auctions" (click)="activeCategory=category.name"
+    <a style="height: 56px" routerLink="/auctions" (click)="auctionsService.activeCategory=category.name;auctionsService.categoryFilter(category.name);"
        class="list-group-item d-flex justify-content-between align-items-center"
-       [class.active]="activeCategory==category.name">
-      <span class="badge bg-secondary rounded-pill">{{findAuctionsWhichCategories(category.name)}}</span>
+       [class.active]="auctionsService.activeCategory==category.name">
+      <span class="badge bg-secondary rounded-pill">{{auctionsService.findAuctionsWhichCategories(category.name)}}</span>
       {{category.name| uppercase}}
       <div class="btn-group dropend">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <button *ngIf="category.name!='all auctions'" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" (click)="findProductList(category.name)">
         </button>
         <ul class="dropdown-menu">
-          <li><a *ngFor="let product of productList(category.name)"></a></li>
+          <li class="dropdown-item hovereffect activeeffectwhite" *ngFor="let product of products"><a routerLink="/auctions" class="text-black text-decoration-none">{{product.name}}</a></li>
         </ul>
       </div>
     </a>
     </div>
   </div>
+<br><br><br>
+
+<div style="width: 250px;margin-left: 20px;" class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Sort By
+  </button>
+  <ul class="dropdown-menu">
+    <li><a routerLink="/auctions" (click)="auctionsService.increasingByPrice();auctionsService.categoryFilter(auctionsService.activeCategory)" class="dropdown-item hovereffectgray">By Price :İncreasing</a></li>
+    <li><button routerLink="/auctions" (click)="auctionsService.decreasingByPrice();auctionsService.categoryFilter(auctionsService.activeCategory)" class="dropdown-item hovereffectgray">By Price : Decreasing</button></li>
+    <li><button *ngIf="auctionsService.activeCategory!=='all auctions'" routerLink="/auctions" (click)="auctionsService.increasingByName();auctionsService.categoryFilter(auctionsService.activeCategory)" class="dropdown-item hovereffectgray">By Name: A-Z</button></li>
+    <li><button *ngIf="auctionsService.activeCategory!=='all auctions'" routerLink="/auctions" (click)="auctionsService.decreasingByName();auctionsService.categoryFilter(auctionsService.activeCategory)" class="dropdown-item hovereffectgray">By Name: Z-A</button></li>
+  </ul>
+</div>

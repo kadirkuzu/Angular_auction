@@ -3,12 +3,13 @@
   <div class="container col-9">
     <div class="row">
       <div *ngFor="let auction of auctionsService.auctions" class="card m-sm-4 m-xl-3 m-lg-4" style="width: 18rem; ">
-        <img style="margin-top: 3px;width: 265px;size: auto " src="https://smilyhomes.com/wp-content/uploads/2022/05/house.jpg" class="card-img-top" alt="...">
+        <img style="margin-top: 3px;width: 265px;size: auto "
+             src="https://smilyhomes.com/wp-content/uploads/2022/05/house.jpg" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
+          <h5 style="text-align: center">{{auction.name}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
             content.</p>
-          <a routerLink="auctionpage" class="btn btn-primary">Go somewhere</a>
+          <a routerLink="auctionpage" style="margin-left: 64px;align-items: center" class="btn btn-secondary" >{{auction.price | currency:"₺":false}} </a>
         </div>
       </div>
     </div>

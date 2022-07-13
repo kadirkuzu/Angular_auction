@@ -1,16 +1,21 @@
 @import "bootstrap";
+@import "font-awesome";
 .hovereffectblack:hover{
   font-weight:bold;
   font-size:medium;
   background-color: black;
   color: white;
 }
+.hovereffectgray:hover{
+  font-size:medium;
+  background-color: #ced4da;
+}
 .hovereffect:hover{
   font-weight:bold;
   font-size:medium;
 }
-.focuseffect:focus{
-
+.activeeffectwhite:active{
+  background-color: white;
 }
 html,body{
   margin: 0;

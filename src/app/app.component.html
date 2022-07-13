@@ -6,7 +6,7 @@
       </a>
       <ul class=" nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 justify-content-between">
         <li style="margin-left: 125px;"><a href="#" routerLink="/home" class="text-primary hovereffect nav-link px-2 text-secondary">Home</a></li>
-        <li style="margin-left: 100px"><a href="#" routerLink="/auctions" class="hovereffect nav-link px-2 text-white" [class.active]="kadir=='kadirkuzu'">See Auctions</a></li>
+        <li style="margin-left: 100px"><a href="#" routerLink="/auctions" class="hovereffect nav-link px-2 text-white" >See Auctions</a></li>
         <li style="margin-left: 100px"><a href="#" routerLink="/add-auctions" class="hovereffect nav-link px-2 text-white">Add Auctions</a></li>
         <li style="margin-left: 100px">
           <button class="focuseffect py-2 d-none d-md-inline-block nav-link dropdown-toggle btn btn-light  "id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: auto;color: white;background-color: rgb(33,37,41);border:0px">Categories</button>
@@ -29,14 +29,14 @@
                aria-label="Search">
       </form>
 
-      <div *ngIf="kadir=='kadirkuzu'" class="text-end">
+      <div *ngIf="!girisVarmi()" class="text-end">
         <button routerLink="/login" type="button" class="btn btn-outline-light me-2">Login</button>
         <button routerLink="/sign-up" style="color: black" type="button" class="btn btn-success">Sign-up</button>
       </div>
 
-      <div *ngIf="kadir=='kadirkuzuu'" class="text-end">
+      <div *ngIf="girisVarmi()" class="text-end">
         <button type="button" routerLink="/userpage" class="btn btn-outline-light me-2">My-Page</button>
-        <button style="color: black" type="button" class="btn btn-danger">Log-out</button>
+        <button (click)="accountService.logOut()" style="color: black" type="button" class="btn btn-danger">Log-out</button>
       </div>
     </div>
   </div>

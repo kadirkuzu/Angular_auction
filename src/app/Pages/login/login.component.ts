@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AccountService} from "../../../Services/accountService/account.service";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,15 @@ export class LoginComponent implements OnInit {
     userName:new FormControl("",[Validators.required]),
     password:new FormControl("",[Validators.required])
   })
-  constructor() { }
+  constructor(private accountService:AccountService) { }
 
   ngOnInit(): void {
+
+  }
+  async login(){
+    const user = this.form.value
+    await this.accountService.login(user)
+    this.form.reset()
   }
 
 }

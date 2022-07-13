@@ -10,51 +10,29 @@ import {AuctionsService} from "../../Services/auctionsService/auctions.service";
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  products: Product[] = []
-  activeCategory = "electronic"
+  products: Product[] = [{name:"deneme",typeOfCategory:"deneme"}]
+  deneme(){
+    console.log("deneme")}
   categories: Categories[] = []
 
-  constructor(private http: HttpClient, private auctions: AuctionsService) {
+  constructor(private http: HttpClient, public  auctionsService: AuctionsService) {
   }
 
-  findAuctionsWhichCategories(categoryname: string): number {
-    let i: number;
-    let result: number = 0;
-    for (i = 0; i < this.auctions.auctions.length; i += 1) {
-      if (this.auctions.auctions[i].type == categoryname) {
-        result += 1
-      }
-    }
-
-    return result
-  }
-
-  async findProductList(categoryname: string): Promise<Product[]> {
+  async findProductList(categoryname: string):Promise<void> {
     let i: number
     let result: Product[] = []
     let list = await this.http.get("http://localhost:3000/products").toPromise();
     result = list as Product[]
-    for (i = 0; i < result.length; i++) {
+    let result1=[]
+    for (i = 0; i < result.length; i+=1) {
       if (result[i].typeOfCategory == categoryname) {
-        result.push(result[i])
+        result1.push(result[i])
       }
     }
-    if (!result) return []
-    return result
+    this.products = result1
   }
-
-  // @ts-ignore
-  productList(categoryName: string):Product[]{
-    this.findProductList(categoryName).then(value => {
-      let result: Product[];
-      result = value
-      return result
-    })
-  }
-
   async ngOnInit(): Promise<void> {
     const res = await this.http.get("http://localhost:3000/categories").toPromise();
     this.categories = res as Categories[]
   }
-
 }
