@@ -1,28 +1,48 @@
-<div  class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin" style="height: 100%;">
-  <div class="modal-dialog" role="document" >
-    <div class="modal-content rounded-5 shadow">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
-        <h2 class="fw-bold mb-0">Login</h2>
-        <button routerLink="/home" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+<div *ngIf="!accountService.loggedIn ;else:hata">
+  <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin"
+       style="height: 100%;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-5 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h2 class="fw-bold mb-0">Login</h2>
+          <button routerLink="/home" type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+        </div>
 
-      <div class="modal-body p-5 pt-0">
-        <form autocomplete="off" [formGroup]="form" (ngSubmit)="login()">
-          <div class="form-floating mb-3">
-            <input formControlName="userName" type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com" autofocus>
-            <label for="floatingInput">Email or username</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input formControlName="password" type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-          </div>
-          <button [disabled]="form.invalid" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Login</button>
-          <hr class="my-4">
-          <h2 class="fs-5 fw-bold mb-3">Don't have an account?</h2>
-          <button routerLink="/sign-up" class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button"><svg class="bi me-1" width="16" height="16" ></svg>Sign-up</button>
-          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" type="button"><svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"/></svg>Log in with Facebook</button>
-        </form>
+        <div class="modal-body p-5 pt-0">
+          <form autocomplete="off" [formGroup]="form" (ngSubmit)="login()">
+            <div class="form-floating mb-3">
+              <input formControlName="userName" type="email" class="form-control rounded-4" id="floatingInput"
+                     placeholder="name@example.com" autofocus>
+              <label for="floatingInput">Email or username</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input formControlName="password" type="password" class="form-control rounded-4" id="floatingPassword"
+                     placeholder="Password">
+              <label for="floatingPassword">Password</label>
+            </div>
+            <button [disabled]="form.invalid" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Login
+            </button>
+            <hr class="my-4">
+            <h2 class="fs-5 fw-bold mb-3">Don't have an account?</h2>
+            <button routerLink="/sign-up" class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button">
+              <svg class="bi me-1" width="16" height="16"></svg>
+              Sign-up
+            </button>
+            <button (click)="accountService.try()" class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" type="button">
+              <svg class="bi me-1" width="16" height="16">
+                <use xlink:href="#facebook"/>
+              </svg>
+              Log in with Facebook
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<ng-template #hata>
+  <div class="alert alert-danger" role="alert">
+    Something went wrong
+  </div>
+</ng-template>

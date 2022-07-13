@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     userName:new FormControl("",[Validators.required]),
     password:new FormControl("",[Validators.required])
   })
-  constructor(private accountService:AccountService) { }
+  constructor(public accountService:AccountService) { }
 
   ngOnInit(): void {
 

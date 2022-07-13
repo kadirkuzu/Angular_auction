@@ -15,6 +15,7 @@ export class AppComponent {
   }
   ngOnInit(): void {
     this.auctionsService.getAuctions().finally(()=>{this.loading=false})
+    if (localStorage.getItem("isLogged")) this.accountService.loggedIn=true
   }
   girisVarmi(){
     return !!localStorage.getItem("isLogged");

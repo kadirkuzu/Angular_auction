@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "../../app/Pages/login/User";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -8,18 +8,22 @@ import Swal from "sweetalert2"
   providedIn: 'root'
 })
 export class AccountService {
-  constructor(private http:HttpClient,private router:Router) { }
-  logedIn=false
-  usersList:User[]=[]
-  user:User={userName:"kadir",name:"kadir",secondName:"kuzu",id:1,emailAdress:"", password:1234}
-  async login(forUser:User){
+  constructor(private http: HttpClient, private router: Router) {
+  }
+
+  loggedIn = false
+  usersList: User[] = []
+  user: User = {userName: "kadir", name: "kadir", secondName: "kuzu", id: 1, emailAdress: "", password: 1234}
+
+  async login(forUser: User) {
     const users = await this.http.get('http://localhost:3000/users').toPromise();
-    this.usersList=users as User[]
+    this.usersList = users as User[]
     for (let user of this.usersList) {
       if ((user.userName.toLowerCase() == forUser.userName.toLowerCase() || user.emailAdress.toLowerCase() == forUser.userName.toLowerCase()) && user.password == forUser.password) {
-        this.logedIn = true
         localStorage.setItem("isLogged", String(user.id))
         await this.router.navigate(["home"])
+        this.loggedIn = true
+        console.log("logedın: " + this.loggedIn)
         await Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -27,7 +31,7 @@ export class AccountService {
           showConfirmButton: false,
           timer: 1500
         })
-        this.user=user
+        this.user = user
         return true
       }
     }
@@ -38,13 +42,17 @@ export class AccountService {
     })
     return false
   }
+
   logOut() {
     localStorage.removeItem("isLogged")
     this.router.navigate(["login"])
-    this.logedIn = false
+    this.loggedIn = false
+    console.log("logedın: " + this.loggedIn)
   }
-  wait=false
-  async signUp(userToAdd:User){
+
+  wait = false
+
+  async signUp(userToAdd: User) {
     const users = await this.http.get('http://localhost:3000/users').toPromise();
     this.usersList = users as User[]
     for (let user of this.usersList) {
@@ -66,8 +74,9 @@ export class AccountService {
       }
     }
     const res = this.http.post('http://localhost:3000/users', userToAdd).toPromise()
-    this.wait=true
+    this.wait = true
   }
+
   async createId() {
     const users = await this.http.get('http://localhost:3000/users').toPromise();
     this.usersList = users as User[]
@@ -78,10 +87,14 @@ export class AccountService {
     return newId + 1
   }
 
-  async findUser(){
+  async findUser() {
     let id = localStorage.getItem("isLogged")
-    let url = 'http://localhost:3000/users/'+id
+    let url = 'http://localhost:3000/users/' + id
     let user = await this.http.get(url).toPromise()
     return user
+  }
+
+  try() {
+    console.log(this.loggedIn)
   }
 }
