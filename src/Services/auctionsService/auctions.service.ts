@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Auctions} from "../../app/Pages/auctions-page/auctions";
+import {Product} from "../../app/categories/Categories";
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,25 @@ export class AuctionsService {
   }
   decreasingByName(){
     this.baseAuctions=this.baseAuctions.reverse()
+  }
+  createId(){
+  let newId=0
+  for (let auctions of this.auctions){if (auctions.id>newId) newId=auctions.id}
+  return newId+1
+  }
+
+  async findProductsOfType(value:any){
+   let result=[]
+   let products:Product[] ;
+   const productsAdres=await this.http.get("http://localhost:3000/products").toPromise()
+    if (!productsAdres)return
+    products = productsAdres as Product[]
+    for(let product of products){
+      if (product.typeOfCategory.toLowerCase()==value.toLowerCase()){
+        result.push(product)
+      }
+    }
+  return result
   }
 
 }

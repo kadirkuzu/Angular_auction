@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AuctionsService} from "../Services/auctionsService/auctions.service";
 import {AccountService} from "../Services/accountService/account.service";
+import {io} from "socket.io-client";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,6 @@ import {AccountService} from "../Services/accountService/account.service";
 export class AppComponent {
   loading=true
   title = 'auction';
-  kadir="kadirkuzu"
   constructor(private auctionsService:AuctionsService,public accountService:AccountService) {
   }
   ngOnInit(): void {

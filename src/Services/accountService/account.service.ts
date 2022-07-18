@@ -14,7 +14,6 @@ export class AccountService {
   loggedIn = false
   usersList: User[] = []
   user: User = {userName: "kadir", name: "kadir", secondName: "kuzu", id: 1, emailAdress: "", password: 1234}
-
   async login(forUser: User) {
     const users = await this.http.get('http://localhost:3000/users').toPromise();
     this.usersList = users as User[]

@@ -10,9 +10,7 @@ import {AuctionsService} from "../../Services/auctionsService/auctions.service";
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  products: Product[] = [{name:"deneme",typeOfCategory:"deneme"}]
-  deneme(){
-    console.log("deneme")}
+  products: Product[] = [{name:"",typeOfCategory:""}]
   categories: Categories[] = []
 
   constructor(private http: HttpClient, public  auctionsService: AuctionsService) {

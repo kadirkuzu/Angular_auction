@@ -4,14 +4,16 @@
     <div class="row">
       <div *ngFor="let auction of auctionsService.auctions" class="card m-sm-4 m-xl-3 m-lg-4" style="width: 18rem; ">
         <img style="margin-top: 3px;width: 265px;size: auto "
-             src="https://smilyhomes.com/wp-content/uploads/2022/05/house.jpg" class="card-img-top">
+             src="{{auction.imgFirst}}" class="card-img-top" alt="No product image entered">
         <div class="card-body">
           <h5 style="text-align: center">{{auction.name}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
             content.</p>
-          <a routerLink="auctionpage" style="margin-left: 64px;align-items: center" class="btn btn-secondary" >{{auction.price | currency:"₺":false}} </a>
+          <a routerLink="/auctionpage/{{auction.id}}" style="margin-left: 64px;align-items: center" class="btn btn-secondary" id="auctionPrice{{auction.id}}">{{auction.price | currency:"₺":false}} </a>
         </div>
       </div>
     </div>
   </div>
 </div>
+<button style="height: 20px;width: 20px;margin-left: 200px" id="buttondeneme2" (click)="startSocket()"></button>
+

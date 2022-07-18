@@ -1,10 +1,10 @@
-<div *ngIf="!accountService.loggedIn;else:hata">
+<div *ngIf="!accountService.loggedIn;else:wrong" class="signup">
   <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin"
        style="height: 100%">
     <div class="modal-dialog" role="document">
       <div class="modal-content rounded-5 shadow">
         <div class="modal-header p-5 pb-4 border-bottom-0">
-          <h2 class="fw-bold mb-0">Kayıt Olun</h2>
+          <h2 class="fw-bold mb-0">Sign Up</h2>
           <button type="button" class="btn-close" routerLink="/home" data-bs-dismiss="modal"
                   aria-label="Close"></button>
         </div>
@@ -14,30 +14,30 @@
             <div class="form-floating mb-3">
               <input formControlName="emailAdress" type="email" class="form-control rounded-4" id="yeniKullaniciGmail"
                      placeholder="name@example.com" pattern='[^ @]*@[^ @]*' autofocus>
-              <label for="yeniKullaniciGmail">Lütfen gmail adresinizi girin</label>
+              <label for="yeniKullaniciGmail">Please write your email</label>
             </div>
             <div class="form-floating mb-3">
               <input formControlName="name" type="email" class="form-control rounded-4" id="yeniKullaniciAd"
                      placeholder="kullanicinin adi">
-              <label for="yeniKullaniciAd">Adınız</label>
+              <label for="yeniKullaniciAd">Your name</label>
             </div>
             <div class="form-floating mb-3">
               <input formControlName="secondName" type="email" class="form-control rounded-4" id="yeniKullaniciSoyad"
                      placeholder="kullanicinin soyadi">
-              <label for="yeniKullaniciSoyad">Soyadınız</label>
+              <label for="yeniKullaniciSoyad">Your second name</label>
             </div>
             <div class="form-floating mb-3">
               <input formControlName="userName" class="form-control rounded-4" id="yeniKullaniciKullaniciAdi"
                      placeholder="kullanici adi">
-              <label for="yeniKullaniciKullaniciAdi">Kullanmak istediğiniz kullanıcı adı</label>
+              <label for="yeniKullaniciKullaniciAdi">The Username you want to use</label>
             </div>
             <div class="form-floating mb-3">
               <input formControlName="password" type="password" class="form-control rounded-4" id="yeniKullaniciSifre"
                      placeholder="Password">
-              <label for="yeniKullaniciSifre">Yeni şifre</label>
+              <label for="yeniKullaniciSifre">New password</label>
             </div>
             <button [disabled]="form.invalid" (click)="signUp()" class="w-100 mb-2 btn btn-lg rounded-4 btn-success"
-                    type="submit">Kayıt ol
+                    type="submit">Sign-up
             </button>
           </form>
         </div>
@@ -45,7 +45,7 @@
     </div>
   </div>
 </div>
-<ng-template #hata>
+<ng-template #wrong>
   <div class="alert alert-danger" role="alert">
     Something went wrong
   </div>

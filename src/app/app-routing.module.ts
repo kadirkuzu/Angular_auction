@@ -14,9 +14,9 @@ const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'add-auctions',component:AddAdComponent,canActivate:[LoginGuard]},
   {path:'auctions',component:AuctionsPageComponent},
-  {path:'login',component:LoginComponent},
-  {path:'sign-up',component:SignUpComponent},
-  {path:'auctions/:auction',component:TheAuctionPageComponent},
+  {path:'login',component:LoginComponent,},
+  {path:'sign-up',component:SignUpComponent,},
+  {path:'auctionpage/:auction',component:TheAuctionPageComponent},
   {path:'userpage',component:UserPageComponent,canActivate:[LoginGuard]}
 ];
 
