@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {io} from 'socket.io-client'
 import {data} from "jquery";
 import {text} from "express";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-auctions-page',
@@ -19,18 +20,15 @@ export class AuctionsPageComponent implements OnInit {
   socket = io("http://localhost:2000")
 
 
- async startSocket(){
-   await this.socket.emit("try","")
+  ngOnInit(): void {
+    this.socket.on("changePrice",data=>this.changePrice(data.id,data.price))
   }
-  changePrice(price:number){
-   let baslik= document.getElementById("baslikdeneme")
-    if(baslik){
-    baslik.innerHTML="DEĞİŞTİRME TAMAMLANDI"}
+async changePrice(id:number,price:number){
+  let elementId="auctionPrice"+id
+  let priceAdress=document.getElementById(elementId)
+  if (priceAdress) priceAdress.innerHTML=String('₺'+price+".00")
   }
 
-  ngOnInit(): void {
-    this.socket.on("changePrice",price=>this.changePrice(price))
-  }
 
 }
 

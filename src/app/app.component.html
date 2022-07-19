@@ -6,7 +6,7 @@
       </a>
       <ul class=" nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 justify-content-between">
         <li style="margin-left: 125px;"><a href="#" routerLink="/home" class="text-primary hovereffect nav-link px-2 text-secondary">Home</a></li>
-        <li style="margin-left: 100px"><a href="#" routerLink="/auctions" class="hovereffect nav-link px-2 text-white" >See Auctions</a></li>
+        <li style="margin-left: 100px"><a href="#" routerLink="/auctions" class="hovereffect nav-link px-2 text-white" (click)="auctionsService.getAuctions()" >See Auctions</a></li>
         <li style="margin-left: 100px"><a href="#" routerLink="/add-auctions" class="hovereffect nav-link px-2 text-white">Add Auctions</a></li>
         <li style="margin-left: 100px">
           <button class="focuseffect py-2 d-none d-md-inline-block nav-link dropdown-toggle btn btn-light  "id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: auto;color: white;background-color: rgb(33,37,41);border:0px">Categories</button>

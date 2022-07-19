@@ -8,16 +8,21 @@
         </div>
 
         <div class="modal-body p-5 pt-0">
-          <form autocomplete="off" [formGroup]="form" >
+          <form autocomplete="off" [formGroup]="form" (ngSubmit)="addProduct()" >
 
             <div class="form-floating mb-3">
-              <input formControlName="name" class="form-control rounded-4" id="newAuctionName" placeholder="newAuctionName" pattern='[^ @]*@[^ @]*' autofocus>
-              <label for="newAuctionName">Please write name of product</label>
+              <input formControlName="name" class="form-control rounded-4" id="newAuctionName" placeholder="newAuctionName" autofocus>
+              <label for="newAuctionName">Write name of product</label>
             </div>
 
             <div class="form-floating mb-3">
-              <input formControlName="price" type="number" class="form-control rounded-4" id="price" placeholder="FirstPrice">
-              <label for="price">Write First Price</label>
+              <textarea formControlName="description" class="form-control rounded-4" id="newAuctionDescription" placeholder="newAuctionName" ></textarea>
+              <label for="newAuctionDescription">Write description of product</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input formControlName="firstPrice" type="number" class="form-control rounded-4" id="firstPrice" placeholder="FirstPrice">
+              <label for="firstPrice">Write First Price</label>
             </div>
 
             <div class="form-floating mb-3">
@@ -40,7 +45,7 @@
                 <option *ngFor="let product of products">{{product.name}}</option>
               </select>
             </div>
-
+            <br>
 
             <div class="mb-3" style="width: 300px">
               <label for="imgFirst" class="form-label"><h5>Upload photo for home page</h5></label>
@@ -52,22 +57,25 @@
               <label for="allImages" class="form-label"><h5>Upload all photos(Max 10)</h5></label>
               <input formControlName="allImages" class="form-control" type="file" id="AllImages" multiple >
             </div>
+            <br>
 
-
-            <div class="mb-3">
-              <label for="startTime" class="form-label"><h5>Select auction's start time</h5></label>
-              <input formControlName="startTime"class="form-control" type="time" id="startTime" >
+            <div class="input-group">
+              <span  style="margin-right: 5px" class="input-group-text"><h5>Select start time</h5></span>
+              <input type="date" formControlName="startDay"    class="form-control">
+              <input type="time" formControlName="startTime"  class="form-control">
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text" style="margin-right: 6px"><h5>Select finish time</h5></span>
+              <input type="date" formControlName="finishDay"  class="form-control">
+              <input type="time" formControlName="finishTime" class="form-control">
             </div>
 
-            <div class="mb-3">
-              <label for="finishTime" class="form-label"><h5>Select auction's and time</h5></label>
-              <input formControlName="finishTime" class="form-control" type="time" id="finishTime" >
-            </div>
+            <br>
 
 
 
-
-            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Add Auction</button>
+            <button [disabled]="form.invalid" class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit" >Add Auction</button>
           </form>
         </div>
       </div>

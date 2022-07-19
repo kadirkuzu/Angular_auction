@@ -11,7 +11,7 @@ import {io} from "socket.io-client";
 export class AppComponent {
   loading=true
   title = 'auction';
-  constructor(private auctionsService:AuctionsService,public accountService:AccountService) {
+  constructor(public auctionsService:AuctionsService,public accountService:AccountService) {
   }
   ngOnInit(): void {
     this.auctionsService.getAuctions().finally(()=>{this.loading=false})

@@ -16,15 +16,14 @@ export class TheAuctionPageComponent implements OnInit {
   socket = io("http://localhost:2000")
   constructor(public auctionService: AuctionsService, public accountService: AccountService, public http: HttpClient) {
   }
+  offers:TheOffersMade[]=[]
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+  await  this.auctionService.getSelectedAuction(this.getId())
+    this.offers=this.auctionService.selectedAuction.offers as TheOffersMade[]
     this.findUser()
-    this.socket.on("addOfferss",data=>{
-      this.addOfferToAll(data.price,data.userName)
-    })
+    this.socket.on("addOfferss",data=>this.addOfferToAll(data.price,data.userName,data.pageUrl))
   }
-
-  theOffersMade: TheOffersMade[] = [{price: 100, customerUserName: "kadir"}]
   customer: User = {userName: "kadir", name: "kadir", secondName: "kuzu", id: 1, emailAdress: "", password: 1234}
 
   async findUserValue() {
@@ -41,20 +40,30 @@ export class TheAuctionPageComponent implements OnInit {
     })
   }
 
-  addOffer() {
+  addOffer(pageUrl:string) {
     let price = <HTMLInputElement>document.getElementById("offerInput")
     if (!price) {console.log("hata");return}
     const priceValue = Number(price.value)||null
     if (priceValue==null){Swal.fire({icon: 'error', title: 'Error', text: 'Please write number'});return}
+    if (priceValue<=this.auctionService.selectedAuction.price){Swal.fire({icon: 'error', title: 'Error', text: 'Please enter a higher price'});return;}
+
     price.value=""
     let customerUserName=this.customer.userName
-    this.socket.emit("addOffers",{price:priceValue,userName:customerUserName})
+    this.socket.emit("addOffers",{price:priceValue,userName:customerUserName,pageUrl:pageUrl})
+    this.socket.emit("listenChangePrice",{id:this.getId(),price:priceValue})
   }
-  addOfferToAll(price:number,username:string){
-    this.theOffersMade.unshift({price: price, customerUserName: username});
-    console.log(username)
+  async addOfferToAll(price:number,username:string,pageUrl:string){
+    if (pageUrl!==window.location.href) return
+    this.offers.unshift({price: price, customerUserName: username});
+   await this.auctionService.offersUptade(this.getId(),price,username)
   }
-
+  getId(){
+    const id:string = window.location.href
+    return Number(id.split("auctionpage/")[1])
+  }
+  getPageUrl(){
+    return window.location.href
+  }
 
 
 }
